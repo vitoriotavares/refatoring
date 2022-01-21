@@ -1,5 +1,9 @@
 const Main = {
 	statement: (invoice, plays) => {
+		playFor = (aPerformance) => {
+			return plays[aPerformance.playID]
+		}
+
 		let totalAmount = 0;
 		let volumeCredits = 0;
 		let result = `Statement for ${invoice.customer}\n`
@@ -10,7 +14,7 @@ const Main = {
 		}).format;
 	
 		for(let perf of invoice.performances){
-			const play = plays[perf.playID];
+			const play = playFor(perf);
 			let thisAmount = Main.amountFor(perf, play);
 			//soma creditos por volume
 			volumeCredits += Math.max(perf.audience - 30,0);
