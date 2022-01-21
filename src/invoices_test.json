@@ -1,0 +1,7 @@
+{ "customer": "BigCo", "performances":
+	[
+		{ "playID": "jorge", "audience": 15 },
+		{ "playID": "vitorio", "audience": 20 },
+		{ "playID": "tavares", "audience": 25 }
+	] 
+}

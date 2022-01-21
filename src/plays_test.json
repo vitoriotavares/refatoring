@@ -1,0 +1,5 @@
+{
+	"jorge": { "name": "Jorge", "type": "tragedy" },
+	"vitorio": { "name": "Vitorio", "type": "comedy" },
+	"tavares": { "name": "Tavares", "type": "tragedy" }
+}
