@@ -15,14 +15,14 @@ const Main = {
 	
 		for(let perf of invoice.performances){
 			const play = playFor(perf);
-			let thisAmount = Main.amountFor(perf, play);
+			let thisAmount = Main.amountFor(perf, playFor(perf));
 			//soma creditos por volume
 			volumeCredits += Math.max(perf.audience - 30,0);
 			//soma um crédito extra para cada dez espectadores de comédia
-			if ("comedy" === play.type) 
+			if ("comedy" === playFor(perf).type) 
 				volumeCredits += Math.floor(perf.audience / 5)
 			//exibe a linha para esta requisição
-			result += `\n${play.name}: ${format(thisAmount/100)}`;
+			result += `\n${playFor(perf).name}: ${format(thisAmount/100)}`;
 			totalAmount += thisAmount;
 		}
 		result += `\nAmount owed is ${format(totalAmount/100)}\n`;
