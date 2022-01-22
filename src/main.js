@@ -35,22 +35,44 @@ const Main = {
 			return result;
 		}
 
-		let totalAmount = 0;
-		let volumeCredits = 0;
-		let result = `Statement for ${invoice.customer}\n`
-		const format = new Intl.NumberFormat("en-US", {
-			style: "currency", 
-			currency: "USD", 
-			minumumFractionDigits: 2
-		}).format;
-	
-		for(let perf of invoice.performances){
-			volumeCredits += volumeCreditsFor(perf);
-			result += `\n${playFor(perf).name}: ${format(amountFor(perf)/100)}`;
-			totalAmount += amountFor(perf);
+		usd = (aNumber) => {
+			return new Intl.NumberFormat("en-US", {
+				style: "currency", 
+				currency: "USD", 
+				minumumFractionDigits: 2
+			}).format(aNumber/100);
 		}
-		result += `\nAmount owed is ${format(totalAmount/100)}\n`;
-		return result;
+
+		totalVolumeCredits = () => {
+			let result = 0;
+			for(let perf of invoice.performances){
+				result += volumeCreditsFor(perf);
+			}
+			return result;
+		}
+
+		totalAmount = () => {
+			let result = 0;
+			for(let perf of invoice.performances){
+				result += amountFor(perf);
+			}
+			return usd(result);
+		}
+		
+		renderPlainText = (invoice, plays) => {
+			let result = `Statement for ${invoice.customer}\n`
+
+			for(let perf of invoice.performances){
+				result += `\n${playFor(perf).name}: ${usd(amountFor(perf))}(${perf.audience} seats)`;
+			}
+
+			result += `\nAmount owed is ${totalAmount()}\n`;
+			result += `You earned ${totalVolumeCredits()} credits\n`;
+			return result;
+		}
+
+		return renderPlainText(invoice, plays);
+		
 	}
 }
 
