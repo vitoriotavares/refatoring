@@ -58,16 +58,21 @@ const Main = {
 			}
 			return usd(result);
 		}
+		
+		renderPlainText = (invoice, plays) => {
+			let result = `Statement for ${invoice.customer}\n`
 
-		let result = `Statement for ${invoice.customer}\n`
+			for(let perf of invoice.performances){
+				result += `\n${playFor(perf).name}: ${usd(amountFor(perf))}(${perf.audience} seats)`;
+			}
 
-		for(let perf of invoice.performances){
-			result += `\n${playFor(perf).name}: ${usd(amountFor(perf))}(${perf.audience} seats)`;
+			result += `\nAmount owed is ${totalAmount()}\n`;
+			result += `You earned ${totalVolumeCredits()} credits\n`;
+			return result;
 		}
 
-		result += `\nAmount owed is ${totalAmount()}\n`;
-		result += `You earned ${totalVolumeCredits()} credits\n`;
-		return result;
+		return renderPlainText(invoice, plays);
+		
 	}
 }
 
