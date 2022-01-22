@@ -35,12 +35,12 @@ const Main = {
 			return result;
 		}
 
-		format = (aNumber) => {
+		usd = (aNumber) => {
 			return new Intl.NumberFormat("en-US", {
 				style: "currency", 
 				currency: "USD", 
 				minumumFractionDigits: 2
-			}).format(aNumber);
+			}).format(aNumber/100);
 		}
 
 		let totalAmount = 0;
@@ -49,10 +49,10 @@ const Main = {
 	
 		for(let perf of invoice.performances){
 			volumeCredits += volumeCreditsFor(perf);
-			result += `\n${playFor(perf).name}: ${format(amountFor(perf)/100)}`;
+			result += `\n${playFor(perf).name}: ${usd(amountFor(perf))}`;
 			totalAmount += amountFor(perf);
 		}
-		result += `\nAmount owed is ${format(totalAmount/100)}\n`;
+		result += `\nAmount owed is ${usd(totalAmount)}\n`;
 		return result;
 	}
 }
