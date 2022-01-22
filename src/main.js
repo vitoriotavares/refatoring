@@ -51,7 +51,7 @@ const Main = {
 			return result;
 		}
 
-		algumaCoisa = () => {
+		totalAmount = () => {
 			let result = 0;
 			for(let perf of invoice.performances){
 				result += amountFor(perf);
@@ -60,12 +60,12 @@ const Main = {
 		}
 
 		let result = `Statement for ${invoice.customer}\n`
-		
+
 		for(let perf of invoice.performances){
 			result += `\n${playFor(perf).name}: ${usd(amountFor(perf))}(${perf.audience} seats)`;
 		}
 
-		result += `\nAmount owed is ${algumaCoisa()}\n`;
+		result += `\nAmount owed is ${totalAmount()}\n`;
 		result += `You earned ${totalVolumeCredits()} credits\n`;
 		return result;
 	}
