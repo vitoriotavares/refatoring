@@ -60,6 +60,7 @@ const Main = {
 		}
 		let volumeCredits = totalVolumeCredits();
 		result += `\nAmount owed is ${usd(totalAmount)}\n`;
+		result += `You earned ${volumeCredits} credits\n`;
 		return result;
 	}
 }
