@@ -48,9 +48,11 @@ const Main = {
 		let result = `Statement for ${invoice.customer}\n`
 	
 		for(let perf of invoice.performances){
-			volumeCredits += volumeCreditsFor(perf);
 			result += `\n${playFor(perf).name}: ${usd(amountFor(perf))}(${perf.audience} seats)`;
 			totalAmount += amountFor(perf);
+		}
+		for(let perf of invoice.performances){
+			volumeCredits += volumeCreditsFor(perf);
 		}
 		result += `\nAmount owed is ${usd(totalAmount)}\n`;
 		return result;
