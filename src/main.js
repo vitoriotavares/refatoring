@@ -58,9 +58,8 @@ const Main = {
 			result += `\n${playFor(perf).name}: ${usd(amountFor(perf))}(${perf.audience} seats)`;
 			totalAmount += amountFor(perf);
 		}
-		let volumeCredits = totalVolumeCredits();
 		result += `\nAmount owed is ${usd(totalAmount)}\n`;
-		result += `You earned ${volumeCredits} credits\n`;
+		result += `You earned ${totalVolumeCredits()} credits\n`;
 		return result;
 	}
 }
