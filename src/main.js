@@ -59,7 +59,7 @@ const Main = {
 			return usd(result);
 		}
 		
-		renderPlainText = (invoice, plays) => {
+		renderPlainText = (data, invoice, plays) => {
 			let result = `Statement for ${invoice.customer}\n`
 
 			for(let perf of invoice.performances){
@@ -71,7 +71,9 @@ const Main = {
 			return result;
 		}
 
-		return renderPlainText(invoice, plays);
+		const statementData = {};
+		statementData.customer = invoice.customer;
+		return renderPlainText(statementData, invoice, plays);
 		
 	}
 }
